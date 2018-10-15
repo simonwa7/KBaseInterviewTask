@@ -6,15 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./data.component.css']
 })
 export class DataComponent implements OnInit {
+    candidates: string[][] = [];
     donations: string[][] = [];
-    private fileText;
 
     constructor() { }
 
     ngOnInit() {
     }
 
-    fileUpload(event) {
+    uploadCandidates(event) {
       var reader = new FileReader();
       reader.readAsText(event.target.files[0]);
       var me = this;
@@ -29,8 +29,35 @@ export class DataComponent implements OnInit {
                   for (var j=0; j<data.length; j++) {
                       tarr.push(data[j]);
                   }
-                  if(tarr[3] == "G"){
-                    me.donations.push(tarr);
+                  if((tarr[5] == "P") && (tarr[3] == "2016")){
+                    me.candidates.push(tarr[0]);
+                  }
+          }
+
+          console.log(me.candidates)
+
+        }
+    }
+
+    uploadDonations(event) {
+      var reader = new FileReader();
+      reader.readAsText(event.target.files[0]);
+      var me = this;
+
+      reader.onload = function (ev: any) {
+
+        var allTextLines = ev.target.result.split(/\r\n|\n/);
+            
+          for (var i=0; i<allTextLines.length; i++) {
+              var data = allTextLines[i].split('|');
+                  var tarr = [];
+                  for (var j=0; j<data.length; j++) {
+                      tarr.push(data[j]);
+                  }
+                  if(tarr[6] == "COM"){
+                    if(me.candidates.includes(tarr[16])){
+                      me.donations.push(tarr);
+                    }
                   }
           }
 

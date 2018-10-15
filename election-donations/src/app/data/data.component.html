@@ -12,8 +12,11 @@
       </button>
     </div>
   </div>
+  Candidate Data
+  <input id="file-upload" type="file" accept=".txt, .csv" (change)="uploadCandidates($event)">
 
-  <input id="file-upload" type="file" accept=".txt, .csv" (change)="fileUpload($event)">
+  Donation Data
+  <input id="file-upload" type="file" accept=".txt, .csv" (change)="uploadDonations($event)">
 
   <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
 
