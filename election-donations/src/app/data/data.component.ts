@@ -7,7 +7,7 @@ import { not } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./data.component.css']
 })
 export class DataComponent implements OnInit {
-    candidates: string[] = [];
+    candidates: any[][] = [];
     donations: string[][] = [];
 
     constructor() { }
@@ -30,8 +30,9 @@ export class DataComponent implements OnInit {
                   for (var j=0; j<data.length; j++) {
                       tarr.push(data[j]);
                   }
+                  tarr.push(0);
                   if((tarr[5] == "P") && (tarr[3] == "2016")){
-                    me.candidates.push(tarr[0]);
+                    me.candidates.push(tarr);
                   }
           }
           console.log("Candidates")
@@ -56,61 +57,69 @@ export class DataComponent implements OnInit {
                       tarr.push(data[j]);
                   }
                   if(tarr[6] == "COM"){
-                    if(me.candidates.includes(tarr[16])){
-                      me.donations.push(tarr);
+
+                    for(var index=0; index<me.candidates.length; index++){
+                      if(me.candidates[index][0] == tarr[16]){
+                        me.donations.push(tarr);
+                        break;
+                      }
                     }
+
                   }
           }
 
-          me.sortDonations()
           console.log("Donations")
           console.log(me.donations)
 
           me.limitCandidates()
+          me.calculateTotalDonations()
+
+          console.log(me.candidates)
         }
-    }
-  
-    sortDonations(){
-      this.donations.sort( function(candidate1, candidate2) {
-        if ( candidate1[7] < candidate2[7] ){
-          return -1;
-        }else if( candidate1[7] > candidate2[7] ){
-          return 1;
-        }else{
-          return 0;
-        }
-      });
     }
 
     // step 1: get id
     limitCandidates(){
-      var candidates_with_donors = this.candidatesWithDonors();
+      var candidates_with_donors = this.candidateIDsWithDonors();
       console.log(candidates_with_donors)
       var num_removed = 0;
 
       for(var index = 0; index < this.candidates.length;){
-        if(!(candidates_with_donors.includes(this.candidates[index]))){
+
+        if(!(candidates_with_donors.includes(this.candidates[index][0]))){
           this.candidates.splice(index, 1);
           num_removed++;
         }else{
           index++;
         }
+
       }
 
       console.log(num_removed)
       console.log(this.candidates)
     }
 
-    candidatesWithDonors(){
-      var candidates: string[] = [];
+    candidateIDsWithDonors(){
+      var candidateIDs: string[] = [];
 
       for(var index = 0; index < this.donations.length; index++){
-        if(!candidates.includes(this.donations[index][16])){
-          candidates.push(this.donations[index][16])
+        if(!candidateIDs.includes(this.donations[index][16])){
+          candidateIDs.push(this.donations[index][16])
         }
       }
 
-      return candidates
+      return candidateIDs
+    }
+
+    calculateTotalDonations(){
+      for(var index=0; index<this.donations.length; index++){
+        for(var cand_index = 0; cand_index<this.candidates.length; cand_index++){
+          if(this.donations[index][16] == this.candidates[cand_index][0]){
+            console.log(this.donations[index][14], this.candidates[cand_index][1])
+            this.candidates[cand_index][15] += +this.donations[index][14]
+          }
+        }
+      }
     }
 
 }
