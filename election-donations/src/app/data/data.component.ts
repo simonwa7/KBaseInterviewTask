@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { not } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-data',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./data.component.css']
 })
 export class DataComponent implements OnInit {
-    candidates: string[][] = [];
+    candidates: string[] = [];
     donations: string[][] = [];
 
     constructor() { }
@@ -33,7 +34,7 @@ export class DataComponent implements OnInit {
                     me.candidates.push(tarr[0]);
                   }
           }
-
+          console.log("Candidates")
           console.log(me.candidates)
 
         }
@@ -61,10 +62,11 @@ export class DataComponent implements OnInit {
                   }
           }
 
-          console.log(me.donations)
           me.sortDonations()
+          console.log("Donations")
           console.log(me.donations)
 
+          me.limitCandidates()
         }
     }
   
@@ -78,6 +80,37 @@ export class DataComponent implements OnInit {
           return 0;
         }
       });
+    }
+
+    // step 1: get id
+    limitCandidates(){
+      var candidates_with_donors = this.candidatesWithDonors();
+      console.log(candidates_with_donors)
+      var num_removed = 0;
+
+      for(var index = 0; index < this.candidates.length;){
+        if(!(candidates_with_donors.includes(this.candidates[index]))){
+          this.candidates.splice(index, 1);
+          num_removed++;
+        }else{
+          index++;
+        }
+      }
+
+      console.log(num_removed)
+      console.log(this.candidates)
+    }
+
+    candidatesWithDonors(){
+      var candidates: string[] = [];
+
+      for(var index = 0; index < this.donations.length; index++){
+        if(!candidates.includes(this.donations[index][16])){
+          candidates.push(this.donations[index][16])
+        }
+      }
+
+      return candidates
     }
 
 }
