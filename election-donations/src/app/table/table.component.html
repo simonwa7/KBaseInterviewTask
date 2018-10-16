@@ -4,17 +4,17 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Header</th>
-        <th>Header</th>
-        <th>Header</th>
-        <th>Header</th>
+        <th *ngFor="let header of this.headers">{{header}}</th>
       </tr>
     </thead>
     <tbody>
-      <!-- <tr *ngFor="let donor of donations; let i = index">
-        <td>{{donor[0]}}</td>
-        <td>{{donor[1]}}</td>
-      </tr> -->
+      <tr *ngFor="let data_object of data; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{data_object[0]}}</td>
+        <td>{{data_object[1]}}</td>
+        <td>{{data_object[2]}}</td>
+        <td>{{data_object[15]}}</td>
+      </tr>
     </tbody>
   </table>
 </div>
