@@ -110,6 +110,9 @@ export class DataComponent implements OnInit {
           // sum donations to each candidate
           me.calculateTotalDonations()
 
+          // sort candidates by donations
+          me.sortCandidates()
+
           console.log("Donations")
           console.log(me.donations)
           console.log("Limited Candidates")
@@ -171,4 +174,15 @@ export class DataComponent implements OnInit {
       }
     }
 
+    sortCandidates(){
+      this.candidates.sort( function(candidate1, candidate2) {
+        if ( candidate1[15] > candidate2[15] ){
+          return -1;
+        }else if( candidate1[15] < candidate2[15] ){
+          return 1;
+        }else{
+          return 0;
+        }
+      });
+    }
 }
