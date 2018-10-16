@@ -12,15 +12,19 @@
       </button>
     </div>
   </div>
-  Candidate Data
-  <input id="file-upload" type="file" accept=".txt, .csv" (change)="uploadCandidates($event)">
+  <div *ngIf="!(this.candidates.length > 0)">
+    Step 1: Upload Candidate Data in Correct Format
+    <input id="file-upload" type="file" accept=".txt, .csv" (change)="uploadCandidates($event)" class="btn btn-sm btn-outline-secondary">
+  </div>
 
-  Donation Data
-  <input id="file-upload" type="file" accept=".txt, .csv" (change)="uploadDonations($event)">
+  <div *ngIf="(this.candidates.length > 0) && !(this.donations.length > 0)">
+    Step 2: Upload Donation Data for the 2015-2016 Election Cycle
+    <input id="file-upload" type="file" accept=".txt, .csv" (change)="uploadDonations($event)" class="btn btn-sm btn-outline-secondary">
+  </div>
 
   <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
 
-  <app-table [title]="'Campaign Donations'" [dataTitle]="'Candidates'" [data]="this.candidates"></app-table>
+  <app-table [title]="'Campaign Donations'" [dataTitle]="'Candidates'" [data]="this.candidates" *ngIf="this.candidates.length > 0"></app-table>
 
 </main>
 
