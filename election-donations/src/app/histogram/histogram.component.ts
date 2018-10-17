@@ -17,7 +17,7 @@ export class HistogramComponent implements OnInit {
 
   private width: number;
   private height: number;
-  private margin = {top: 20, right: 20, bottom: 80, left: 80};
+  private margin = {top: 20, right: 20, bottom: 80, left: 40};
 
   private x: any;
   private y: any;
@@ -32,8 +32,6 @@ export class HistogramComponent implements OnInit {
       this.initAxis();
       this.drawAxis();
       this.drawBars();
-
-      console.log(d3.select('svg').node().getBoundingClientRect().width)
   }
 
   private initSvg() {
@@ -59,7 +57,6 @@ export class HistogramComponent implements OnInit {
           .selectAll("text")
           .attr("y", 0)
           .attr("x", 9)
-          .attr("dy", "1em")
           .attr("transform", "rotate(90)")
           .style("text-anchor", "start");
       this.g.append('g')
@@ -68,6 +65,7 @@ export class HistogramComponent implements OnInit {
           .append('text')
           .attr('class', 'axis-title')
           .attr('transform', 'rotate(-90)')
+          .attr('x', 0)
           .attr('y', 6)
           .attr('dy', '0.71em')
           .attr('text-anchor', 'end')
