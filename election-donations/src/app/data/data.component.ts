@@ -11,6 +11,7 @@ export class DataComponent implements OnInit {
     candidates: any[][] = [];
     donations: string[][] = [];
     showHistogram: boolean = false;
+    histogramData: any[] = [];
 
     constructor() { }
 
@@ -188,5 +189,14 @@ export class DataComponent implements OnInit {
           return 0;
         }
       });
+    }
+
+    reassignCandidateData(){
+      this.showHistogram = true
+
+      for(var i=0; i<this.candidates.length; i++){
+        var candidate = {"name": this.candidates[i][1], "value": this.candidates[i][15]};
+        this.histogramData.push(candidate);
+      }
     }
 }

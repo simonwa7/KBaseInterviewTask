@@ -10,10 +10,10 @@ import * as d3Axis from 'd3-axis';
   templateUrl: './histogram.component.html',
   styleUrls: ['./histogram.component.css']
 })
+
 export class HistogramComponent implements OnInit {
   @Input('candidateData') candidateData = [];
-  will_data = [{"name": "Hillary Clinton", "donations": 111715}, {"name": "Donald Trump", "donations": 50500}, {"name": "Bernie Sanders", "donations": 500}, {"name": "Ben Carson", "donations": 71430}]
-  title = 'Bar Chart';
+  @Input('title') title = 'Histogram';
 
   private width: number;
   private height: number;
@@ -46,7 +46,7 @@ export class HistogramComponent implements OnInit {
       this.x = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
       this.y = d3Scale.scaleLinear().rangeRound([this.height, 0]);
       this.x.domain(this.candidateData.map((d) => d.name));
-      this.y.domain([0, d3Array.max(this.candidateData, (d) => d.donations)*1.2]);
+      this.y.domain([0, d3Array.max(this.candidateData, (d) => d.value)*1.2]);
   }
 
   private drawAxis() {
@@ -72,9 +72,9 @@ export class HistogramComponent implements OnInit {
           .enter().append('rect')
           .attr('class', 'bar')
           .attr('x', (d) => this.x(d.name) )
-          .attr('y', (d) => this.y(d.donations) )
+          .attr('y', (d) => this.y(d.value) )
           .attr('width', this.x.bandwidth())
-          .attr('height', (d) => this.height - this.y(d.donations) );
+          .attr('height', (d) => this.height - this.y(d.value) );
   }
 
 }

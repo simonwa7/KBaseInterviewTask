@@ -16,13 +16,13 @@
       
         <div *ngIf="(this.donations.length > 0) && (!this.showHistogram)">
             Step 3: Show Graph!
-            <button class="btn btn-sm btn-outline-secondary" (click)="this.showHistogram = true">Show Me the MONEY</button>
+            <button class="btn btn-sm btn-outline-secondary" (click)="reassignCandidateData()">Show Me the MONEY</button>
         </div>
       </div>
     </div>
   </div>
 
-  <app-histogram *ngIf="this.showHistogram" [candidateData]='[{"name": "Hillary Clinton", "donations": 111715}, {"name": "Donald Trump", "donations": 50500}, {"name": "Bernie Sanders", "donations": 500}, {"name": "Ben Carson", "donations": 71430}]'></app-histogram>
+  <app-histogram *ngIf="this.showHistogram" [candidateData]='this.histogramData' [title]="'2016 Presidential Election Contributions'"></app-histogram>
 
   <app-table [title]="'Campaign Donations'" [dataTitle]="'Candidates'" [data]="this.candidates" *ngIf="this.candidates.length > 0"></app-table>
 
