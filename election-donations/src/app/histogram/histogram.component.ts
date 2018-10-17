@@ -17,7 +17,7 @@ export class HistogramComponent implements OnInit {
 
   private width: number;
   private height: number;
-  private margin = {top: 20, right: 20, bottom: 30, left: 80};
+  private margin = {top: 20, right: 20, bottom: 80, left: 80};
 
   private x: any;
   private y: any;
@@ -48,14 +48,20 @@ export class HistogramComponent implements OnInit {
       this.x = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
       this.y = d3Scale.scaleLinear().rangeRound([this.height, 0]);
       this.x.domain(this.candidateData.map((d) => d.name));
-      this.y.domain([0, d3Array.max(this.candidateData, (d) => d.value)*1.5]);
+      this.y.domain([0, d3Array.max(this.candidateData, (d) => d.value)*1.2]);
   }
 
   private drawAxis() {
       this.g.append('g')
           .attr('class', 'axis axis--x')
           .attr('transform', 'translate(0,' + this.height + ')')
-          .call(d3Axis.axisBottom(this.x));
+          .call(d3Axis.axisBottom(this.x))
+          .selectAll("text")
+          .attr("y", 0)
+          .attr("x", 9)
+          .attr("dy", "1em")
+          .attr("transform", "rotate(90)")
+          .style("text-anchor", "start");
       this.g.append('g')
           .attr('class', 'axis axis--y')  
           .call(d3Axis.axisLeft(this.y).ticks(10, '$'))
