@@ -46,7 +46,7 @@ export class HistogramComponent implements OnInit {
       this.x = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
       this.y = d3Scale.scaleLinear().rangeRound([this.height, 0]);
       this.x.domain(this.candidateData.map((d) => d.name));
-      this.y.domain([0, d3Array.max(this.candidateData, (d) => d.value)*1.2]);
+      this.y.domain([0, d3Array.max(this.candidateData, (d) => d.value)*1.3]);
   }
 
   private drawAxis() {

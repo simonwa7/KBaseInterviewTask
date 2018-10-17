@@ -10,6 +10,7 @@ export class DataComponent implements OnInit {
     @Input('title') title: string;
     candidates: any[][] = [];
     donations: string[][] = [];
+    showTable: boolean = false;
     showHistogram: boolean = false;
     histogramData: any[] = [];
 
@@ -192,7 +193,7 @@ export class DataComponent implements OnInit {
     }
 
     reassignCandidateData(){
-      this.showHistogram = true
+      this.showHistogram = !this.showHistogram;
 
       for(var i=0; i<this.candidates.length; i++){
         var name = "";
