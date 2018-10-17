@@ -6,6 +6,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DataComponent } from './data/data.component';
 import { TableComponent } from './table/table.component';
+import { HistogramComponent } from './histogram/histogram.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { TableComponent } from './table/table.component';
     NavbarComponent,
     SidebarComponent,
     DataComponent,
-    TableComponent
+    TableComponent,
+    HistogramComponent
   ],
   imports: [
     BrowserModule
