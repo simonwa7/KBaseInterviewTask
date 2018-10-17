@@ -1,6 +1,6 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-    <h1 class="h2">Dashboard</h1>
+    <h1 class="h2">{{title}}</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
       <div class="btn-group mr-2">
 
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <app-histogram *ngIf="this.showHistogram"></app-histogram>
+  <app-histogram *ngIf="this.showHistogram" [candidateData]='[{"name": "Hillary Clinton", "donations": 111715}, {"name": "Donald Trump", "donations": 50500}, {"name": "Bernie Sanders", "donations": 500}, {"name": "Ben Carson", "donations": 71430}]'></app-histogram>
 
   <app-table [title]="'Campaign Donations'" [dataTitle]="'Candidates'" [data]="this.candidates" *ngIf="this.candidates.length > 0"></app-table>
 

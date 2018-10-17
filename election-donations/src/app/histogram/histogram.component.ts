@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Input } from '@angular/core';
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
 import * as d3Array from 'd3-array';
@@ -11,6 +11,7 @@ import * as d3Axis from 'd3-axis';
   styleUrls: ['./histogram.component.css']
 })
 export class HistogramComponent implements OnInit {
+  @Input('candidateData') candidateData = [];
   will_data = [{"name": "Hillary Clinton", "donations": 111715}, {"name": "Donald Trump", "donations": 50500}, {"name": "Bernie Sanders", "donations": 500}, {"name": "Ben Carson", "donations": 71430}]
   title = 'Bar Chart';
 
@@ -26,7 +27,7 @@ export class HistogramComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-      console.log(this.will_data)
+      console.log(this.candidateData)
       this.initSvg();
       this.initAxis();
       this.drawAxis();
@@ -44,8 +45,8 @@ export class HistogramComponent implements OnInit {
   private initAxis() {
       this.x = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
       this.y = d3Scale.scaleLinear().rangeRound([this.height, 0]);
-      this.x.domain(this.will_data.map((d) => d.name));
-      this.y.domain([0, d3Array.max(this.will_data, (d) => d.donations)*1.2]);
+      this.x.domain(this.candidateData.map((d) => d.name));
+      this.y.domain([0, d3Array.max(this.candidateData, (d) => d.donations)*1.2]);
   }
 
   private drawAxis() {
@@ -67,7 +68,7 @@ export class HistogramComponent implements OnInit {
 
   private drawBars() {
       this.g.selectAll('.bar')
-          .data(this.will_data)
+          .data(this.candidateData)
           .enter().append('rect')
           .attr('class', 'bar')
           .attr('x', (d) => this.x(d.name) )

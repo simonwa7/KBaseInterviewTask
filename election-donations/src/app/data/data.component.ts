@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { not } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -7,6 +7,7 @@ import { not } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./data.component.css']
 })
 export class DataComponent implements OnInit {
+    @Input('title') title: string;
     candidates: any[][] = [];
     donations: string[][] = [];
     showHistogram: boolean = false;
@@ -175,6 +176,8 @@ export class DataComponent implements OnInit {
       }
     }
 
+    /* This function is designed to sort the candidates list by the amount of
+          donations they have received */
     sortCandidates(){
       this.candidates.sort( function(candidate1, candidate2) {
         if ( candidate1[15] > candidate2[15] ){
