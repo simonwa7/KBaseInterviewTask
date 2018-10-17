@@ -32,12 +32,14 @@ export class HistogramComponent implements OnInit {
       this.initAxis();
       this.drawAxis();
       this.drawBars();
+
+      console.log(d3.select('svg').node().getBoundingClientRect().width)
   }
 
   private initSvg() {
       this.svg = d3.select('svg');
-      this.width = +this.svg.attr('width') - this.margin.left - this.margin.right;
-      this.height = +this.svg.attr('height') - this.margin.top - this.margin.bottom;
+      this.width = +this.svg.node().getBoundingClientRect().width - this.margin.left - this.margin.right;
+      this.height = +this.svg.node().getBoundingClientRect().height - this.margin.top - this.margin.bottom;
       this.g = this.svg.append('g')
           .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
   }
@@ -46,7 +48,7 @@ export class HistogramComponent implements OnInit {
       this.x = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
       this.y = d3Scale.scaleLinear().rangeRound([this.height, 0]);
       this.x.domain(this.candidateData.map((d) => d.name));
-      this.y.domain([0, d3Array.max(this.candidateData, (d) => d.value)*1.2]);
+      this.y.domain([0, d3Array.max(this.candidateData, (d) => d.value)*1.5]);
   }
 
   private drawAxis() {

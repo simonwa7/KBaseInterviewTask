@@ -195,7 +195,7 @@ export class DataComponent implements OnInit {
       this.showHistogram = true
 
       for(var i=0; i<this.candidates.length; i++){
-        var candidate = {"name": this.candidates[i][1], "value": this.candidates[i][15]};
+        var candidate = {"name": this.candidates[i][0], "value": this.candidates[i][15]};
         this.histogramData.push(candidate);
       }
     }
