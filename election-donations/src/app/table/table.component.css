@@ -1,11 +1,15 @@
 .red{
-    background-color: lightcoral;
+    background-color: #ffcccc;
 }
 
-.white{
-    /*background-color: lightgray;*/
+.header{
+    background-image: linear-gradient(to right, lightblue , #ffcccc);
 }
 
 .blue{
     background-color: lightblue;
+}
+
+.green{
+    background-color: lightgreen;
 }

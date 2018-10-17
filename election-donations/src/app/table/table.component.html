@@ -2,21 +2,24 @@
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
-      <tr>
-        <th class="red">#</th>
-        <th *ngFor="let header of this.headers; let i = index" 
-            [ngClass]="{'white': i%3 == 0, 'blue': i%3 == 1, 'red': i%3 == 2}">
+      <tr class="header">
+        <th>#</th>
+        <th *ngFor="let header of this.headers; let i = index">
             {{header}}
         </th>
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td></td>
+        <td *ngFor="let header of this.headers"></td>
+      </tr>
       <tr *ngFor="let data_object of data; let i = index" class="table-row">
-        <td class="red">{{i+1}}</td>
-        <td class="white">{{data_object[0]}}</td>
-        <td class="blue">{{data_object[1]}}</td>
-        <td class="red">{{data_object[2]}}</td>
-        <td class="white">{{data_object[15]}}</td>
+        <td [ngClass]="{'red': data_object[2] == 'REP', 'blue': data_object[2] == 'DEM', 'green': data_object[2] == 'LIB'}">{{i+1}}</td>
+        <td [ngClass]="{'red': data_object[2] == 'REP', 'blue': data_object[2] == 'DEM', 'green': data_object[2] == 'LIB'}">{{data_object[0]}}</td>
+        <td [ngClass]="{'red': data_object[2] == 'REP', 'blue': data_object[2] == 'DEM', 'green': data_object[2] == 'LIB'}">{{data_object[1]}}</td>
+        <td [ngClass]="{'red': data_object[2] == 'REP', 'blue': data_object[2] == 'DEM', 'green': data_object[2] == 'LIB'}">{{data_object[2]}}</td>
+        <td [ngClass]="{'red': data_object[2] == 'REP', 'blue': data_object[2] == 'DEM', 'green': data_object[2] == 'LIB'}">{{data_object[15]}}</td>
       </tr>
     </tbody>
   </table>
