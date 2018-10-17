@@ -3,34 +3,25 @@
     <h1 class="h2">Dashboard</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
       <div class="btn-group mr-2">
-        <button class="btn btn-sm btn-outline-secondary">Share</button>
-        <button class="btn btn-sm btn-outline-secondary">Export</button>
+
+        <div *ngIf="!(this.candidates.length > 0)">
+          Step 1: Upload Candidate Data in Correct Format
+          <input id="file-upload" type="file" accept=".txt, .csv" (change)="uploadCandidates($event)" class="btn btn-sm btn-outline-secondary">
+        </div>
+      
+        <div *ngIf="(this.candidates.length > 0) && !(this.donations.length > 0)">
+          Step 2: Upload Donation Data for the 2015-2016 Election Cycle
+          <input id="file-upload" type="file" accept=".txt, .csv" (change)="uploadDonations($event)" class="btn btn-sm btn-outline-secondary">
+        </div>
+      
+        <div *ngIf="(this.donations.length > 0) && (!this.showHistogram)">
+            Step 3: Show Graph!
+            <button class="btn btn-sm btn-outline-secondary" (click)="this.showHistogram = true">Show Me the MONEY</button>
+        </div>
       </div>
-      <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-        <span data-feather="calendar"></span>
-        This week
-      </button>
     </div>
   </div>
 
-
-  <div *ngIf="!(this.candidates.length > 0)">
-    Step 1: Upload Candidate Data in Correct Format
-    <input id="file-upload" type="file" accept=".txt, .csv" (change)="uploadCandidates($event)" class="btn btn-sm btn-outline-secondary">
-  </div>
-
-  <div *ngIf="(this.candidates.length > 0) && !(this.donations.length > 0)">
-    Step 2: Upload Donation Data for the 2015-2016 Election Cycle
-    <input id="file-upload" type="file" accept=".txt, .csv" (change)="uploadDonations($event)" class="btn btn-sm btn-outline-secondary">
-  </div>
-
-  <div *ngIf="(this.donations.length > 0) && (!this.showHistogram)">
-      Step 3: Show Graph!
-      <button class="btn btn-sm btn-outline-secondary" (click)="this.showHistogram = true">Show Me the MONEY</button>
-  </div>
-
-
-  
   <app-histogram *ngIf="this.showHistogram"></app-histogram>
 
   <app-table [title]="'Campaign Donations'" [dataTitle]="'Candidates'" [data]="this.candidates" *ngIf="this.candidates.length > 0"></app-table>
