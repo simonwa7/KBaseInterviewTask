@@ -15,11 +15,11 @@
         <td *ngFor="let header of this.headers"></td>
       </tr>
       <tr *ngFor="let data_object of data; let i = index" class="table-row">
-        <td [ngClass]="{'red': data_object[2] == 'REP', 'blue': data_object[2] == 'DEM', 'green': data_object[2] == 'LIB'}">{{i+1}}</td>
-        <td [ngClass]="{'red': data_object[2] == 'REP', 'blue': data_object[2] == 'DEM', 'green': data_object[2] == 'LIB'}">{{data_object[0]}}</td>
+        <td>{{i+1}}</td>
+        <td>{{data_object[0]}}</td>
         <td [ngClass]="{'red': data_object[2] == 'REP', 'blue': data_object[2] == 'DEM', 'green': data_object[2] == 'LIB'}">{{data_object[1]}}</td>
         <td [ngClass]="{'red': data_object[2] == 'REP', 'blue': data_object[2] == 'DEM', 'green': data_object[2] == 'LIB'}">{{data_object[2]}}</td>
-        <td [ngClass]="{'red': data_object[2] == 'REP', 'blue': data_object[2] == 'DEM', 'green': data_object[2] == 'LIB'}">{{data_object[15]}}</td>
+        <td>{{data_object[15]}}</td>
       </tr>
     </tbody>
   </table>

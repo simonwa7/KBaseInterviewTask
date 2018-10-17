@@ -59,6 +59,8 @@ export class DataComponent implements OnInit {
           }
           console.log("Candidates")
           console.log(me.candidates)
+
+          me.showTable = true;
         }
     }
 
@@ -192,6 +194,10 @@ export class DataComponent implements OnInit {
       });
     }
 
+    /* This function is designed to loop through the list of candidates and 
+          push them as a new data type to the histogramData object. This object
+          contains the last name of the candidate and the donations they 
+          received. */
     reassignCandidateData(){
       this.showHistogram = !this.showHistogram;
 
