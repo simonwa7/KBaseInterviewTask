@@ -24,10 +24,10 @@
 
   <div *ngIf="(this.donations.length > 0)">
       Step 3: Show Graph!
-      <button class="btn btn-sm btn-outline-secondary">Show Me the MONEY</button>
+      <button class="btn btn-sm btn-outline-secondary" (click)="this.showHistogram = true">Show Me the MONEY</button>
   </div>
 
-  <!-- <app-histogram></app-histogram> -->
+  <app-histogram *ngIf="this.showHistogram"></app-histogram>
 
   <!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->
 
